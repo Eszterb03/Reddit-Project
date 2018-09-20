@@ -1,0 +1,25 @@
+{
+  "name": "reddit-project",
+  "version": "1.0.0",
+  "description": "Clone of Reddit page ",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Eszterb03/Reddit-Project.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Eszterb03/Reddit-Project/issues"
+  },
+  "homepage": "https://github.com/Eszterb03/Reddit-Project#readme",
+  "dependencies": {
+    "body": "^5.1.0",
+    "express": "^4.16.3",
+    "mysql": "^2.16.0",
+    "parser": "^0.1.4"
+  }
+}
