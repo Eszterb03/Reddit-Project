@@ -24,7 +24,7 @@ app.get('/api/posts', (req, res) => {
   conn.query(`SELECT * FROM posts`, (err, posts) => {
     if (err) {
       res.json({
-        error: err.message,
+        err: err.message,
       });
     };
     res.status(200).json({
@@ -60,19 +60,75 @@ app.post('/posts', jsonParser, (req, res) => {
 
 app.put('/posts/:id/upvote', jsonParser, (req, res) => {
   let id = req.params.id;
-  // let newScore = req.body.score;
-  conn.query(`UPDATE posts SET score = score+1 WHERE id = ${id}`, (err, posts) => {
+  if (id) {
+    conn.query(`UPDATE posts SET score = score+1 WHERE id = ${id}`, (err) => {
+      if (err) {
+        res.json({
+          err: err.message,
+        });
+      };
+      conn.query(`SELECT * FROM posts Where id=${id}`, (err, posts) => {
+        if (err) {
+          res.status(500).json({
+            err: err.message,
+          });
+        };
+        res.status(200).json({
+          posts
+        });
+      });
+    });
+  } else {
+    res.json({
+      err: "Please provide an ID",
+    });
+  }
+});
+
+
+app.put('/posts/:id/downvote', jsonParser, (req, res) => {
+  let id = req.params.id;
+  conn.query(`UPDATE posts SET score = score-1 WHERE id = ${id}`, (err) => {
     if (err) {
-      res.json({
-        error: err.message,
+      res.status(500).json({
+        err: err.message,
       });
     };
-    res.status(200).json({
-      posts
+    conn.query(`SELECT * FROM posts Where id=${id}`, (err, posts) => {
+      if (err) {
+        res.status(500).json({
+          err: err.message,
+        });
+      };
+      res.status(200).json({
+        posts
+      });
     });
   });
 });
 
+app.put('/posts/:id', jsonParser, (req, res) => {
+  let id = req.params.id;
+  let newTitle = req.body.title;
+  let newUrl = req.body.url;
+  conn.query(`UPDATE posts SET title = "${newTitle}", url = "${newUrl}" WHERE posts.id = ${id}`, (err) => {
+    if (err) {
+      res.status(500).json({
+        err: err.message,
+      });
+    };
+    conn.query(`SELECT * FROM posts Where id=${id}`, (err, posts) => {
+      if (err) {
+        res.status(500).json({
+          err: err.message,
+        });
+      };
+      res.status(200).json({
+        posts
+      });
+    });
+  });
+});
 
 
 app.listen(PORT, () => {
