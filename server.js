@@ -34,7 +34,7 @@ app.get('/api/posts', (req, res) => {
 });
 
 app.post('/posts', jsonParser, (req, res) => {
-  if (req.body && req.body.title && req.body.url) {
+  if (req.body.title && req.body.url) {
     conn.query(`INSERT INTO posts(title,url) VALUES ('${req.body.title}','${req.body.url}')`, (err, posts) => {
       if (err) {
         res.json({
@@ -58,8 +58,23 @@ app.post('/posts', jsonParser, (req, res) => {
   };
 });
 
+app.put('/posts/:id/upvote', jsonParser, (req, res) => {
+  let id = req.params.id;
+  // let newScore = req.body.score;
+  conn.query(`UPDATE posts SET score = score+1 WHERE id = ${id}`, (err, posts) => {
+    if (err) {
+      res.json({
+        error: err.message,
+      });
+    };
+    res.status(200).json({
+      posts
+    });
+  });
+});
+
+
 
 app.listen(PORT, () => {
   console.log(`App is up and running on port ${PORT}`);
 });
-
