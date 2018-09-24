@@ -1,0 +1,19 @@
+body{
+  background-color: gainsboro;
+  height: 100vh;
+}
+
+/* .wrapperPic{
+  position: relative;
+} */
+
+.picMovie{
+  /* display: flex;
+  justify-content: center; */
+  background-image: "assets/picbackg.jpg";
+  background-size: cover;
+  background-position: center;
+  width: 100%; 
+  height: 176px;  
+}
+

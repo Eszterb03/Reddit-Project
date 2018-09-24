@@ -1,5 +1,5 @@
 const express = require('express');
-// const path = require('path');
+const path = require('path');
 const app = express();
 const mysql = require('mysql');
 const bodyParser = require('body-parser');
@@ -15,6 +15,11 @@ const conn = mysql.createConnection({
   database: 'reddit',
 });
 
+app.use('/assets', express.static('assets'));
+
+app.get('/', (req, res) => {
+  res.sendFile(path.join(__dirname, 'index.html'))
+});
 
 app.get('/hello', (req, res) => {
   res.send("hello world")
@@ -128,6 +133,27 @@ app.put('/posts/:id', jsonParser, (req, res) => {
       });
     });
   });
+});
+
+
+app.delete('/posts/:id', (req, res) => {
+  let id = req.params.id;
+  if (id) {
+    conn.query(`DELETE FROM posts WHERE posts.id = ${id}`, (err, posts) => {
+      if (err) {
+        res.status(500).json({
+          err: err.message,
+        });
+      };
+      res.status(404).json({
+        err: "This post doesn't exist",
+      });
+    });
+  } else {
+    res.json({
+      err: "Please provide an ID",
+    });
+  }
 });
 
 
