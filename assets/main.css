@@ -46,6 +46,22 @@ body{
   color:#101;
 }
 
+
+.title {
+padding-left: 20px;
+align-self: center;
+}
+
+.voterDiv {
+  display:flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.voterDiv:nth-child(2){
+  line-height: 8px;
+}
 .postDiv a:hover{
   color: green;
 }

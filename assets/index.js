@@ -24,11 +24,15 @@ window.onload = () => {
         upvote.appendChild(upvoteImg);
         voter.appendChild(upvote);
 
+        const scoreDiv = document.createElement('div');
+        scoreDiv.className = 'score';
+        scoreDiv.innerHTML = post.score;
+        voter.appendChild(scoreDiv);
 
         const downvote = document.createElement('div');
         downvote.className = 'downvote';
         const downvoteImg = document.createElement('img');
-        upvoteImg.setAttribute('src', 'assets/downvoted.png');
+        downvoteImg.setAttribute('src', 'assets/downvoted.png');
         voter.appendChild(downvote);
         downvote.appendChild(downvoteImg);
 
@@ -36,8 +40,10 @@ window.onload = () => {
         const titlePost = document.createElement('h2');
         titlePost.innerText = post.title;
         const postLinkDiv = document.createElement('div');
+        postLinkDiv.className = "title"
         const postLink = document.createElement('a');
         postLink.setAttribute('href', post.url);
+
 
         postLinkDiv.appendChild(postLink);
         postDiv.appendChild(postLinkDiv);
