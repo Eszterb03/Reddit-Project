@@ -1,5 +1,5 @@
 body{
-  background-color: gainsboro;
+  background-color: #F0EFF4;
   height: 100vh;
   font-family: Lato;
   font-weight: 400;
@@ -8,6 +8,7 @@ body{
 
 .picMovie  {
   background-image: url("picbackg.jpg");
+  opacity: 0.9;
   background-size: cover;
   background-position: top;
   width: 100%; 
@@ -24,3 +25,27 @@ body{
   letter-spacing: 0.5em;
 }
 
+.postDiv {
+  margin-left: 50px;
+  padding-left: 60px;
+  margin-top: 20px;
+  border: solid #F0EFF4;  
+  display: flex;
+  width: 600px;
+  height: 100px;
+  flex-flow: row wrap;
+  background: #D7D8D9;
+}
+
+.postDiv a {
+  font-size: 10px;
+  font-weight: 500;
+  align-self: center;
+  line-height: 22px;
+  text-decoration: none;
+  color:#101;
+}
+
+.postDiv a:hover{
+  color: green;
+}
