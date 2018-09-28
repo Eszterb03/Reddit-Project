@@ -10,6 +10,7 @@ window.onload = () => {
       const posts = JSON.parse(http.response).posts
       posts.forEach(post => {
         const postDiv = document.createElement('div');
+        postDiv.className = 'postDiv';
         const titlePost = document.createElement('h2');
         titlePost.innerText = post.title;
         let postLink = document.createElement('a');
