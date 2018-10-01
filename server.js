@@ -15,6 +15,7 @@ const conn = mysql.createConnection({
   database: 'reddit',
 });
 
+
 app.use('/assets', express.static('assets'));
 
 app.get('/', (req, res) => {
@@ -40,7 +41,7 @@ app.get('/api/posts', (req, res) => {
 
 app.post('/posts', jsonParser, (req, res) => {
   if (req.body.title && req.body.url) {
-    conn.query(`INSERT INTO posts(title,url) VALUES ('${req.body.title}','${req.body.url}')`, (err, posts) => {
+    conn.query('INSERT INTO posts(title,url) VALUES(?,?);', [req.body.title, req.body.url], (err, posts) => {
       if (err) {
         res.json({
           err: err.message,
