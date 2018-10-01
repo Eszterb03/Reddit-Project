@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Submit</title>
+
+</head>
+
+<body>
+
+  <form id="formHandler" action="http://localhost:3030/posts" method="POST" enctype="application/json">
+    <div>
+      <label for="submit"> Submit your new post:</label>
+      <br />
+      <input required type="text" id="submit" name="title" placeholder="title">
+      <br />
+    </div>
+    <br />
+    <div>
+      <label for="submiturl"></label>
+      <input required type="url" id="submiturl" name="url" placeholder="url">
+    </div>
+    <button type="submit">Submit</button>
+  </form>
+
+</body>
+
+</html>

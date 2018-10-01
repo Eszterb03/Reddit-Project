@@ -84,16 +84,17 @@ window.onload = () => {
         btnModifyDiv.className = 'btnModifyDiv';
         btnModify.className = "button btnModify";
         btnModify.innerText = 'Modify';
-
+        const buttonDiv = document.createElement('div');
+        buttonDiv.className = 'buttonforchange';
 
         postLinkDiv.appendChild(postLink);
         postDiv.appendChild(postLinkDiv);
         postLink.appendChild(titlePost);
         postLink.appendChild(timestamp);
-        postDiv.appendChild(btnModifyDiv);
-        postDiv.appendChild(btnDeleteDiv);
-        btnModifyDiv.appendChild(btnModify);
-        btnDeleteDiv.appendChild(btnDelete);
+
+        postLinkDiv.appendChild(buttonDiv);
+        buttonDiv.appendChild(btnModify);
+        buttonDiv.appendChild(btnDelete);
       });
 
       const vote = (id, vote) => {
