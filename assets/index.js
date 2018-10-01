@@ -97,8 +97,16 @@ window.onload = () => {
         buttonDiv.appendChild(btnDelete);
       });
 
+
+      const modify = (id) => {
+        const url = `/posts/${id}`;
+        fetch(url, {
+          method: "PUT"
+        }).then(location.href = `http://localhost:3030`);
+      };
+
       const vote = (id, vote) => {
-        const url = `/posts/${id}/${vote}`;
+        const url = `/ posts / ${id}/${vote}`;
         fetch(url, {
           method: "PUT",
         });

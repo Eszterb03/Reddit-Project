@@ -6,9 +6,9 @@ body{
   margin: auto;
 }
 
-a {
+.btn-new-post {
   text-decoration: none;
-  color:darkgray;
+  color:black;
 }
 
 .btnDelete, .btnModify{

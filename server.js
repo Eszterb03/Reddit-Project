@@ -5,6 +5,9 @@ const mysql = require('mysql');
 const bodyParser = require('body-parser');
 const jsonParser = bodyParser.json();
 
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.json());
+
 PORT = 3030;
 
 
@@ -22,8 +25,9 @@ app.get('/', (req, res) => {
   res.sendFile(path.join(__dirname, 'index.html'))
 });
 
-app.get('/hello', (req, res) => {
-  res.send("hello world")
+
+app.get('/submit.html', (req, res) => {
+  res.sendFile(path.join(__dirname, 'submit.html'))
 });
 
 app.get('/api/posts', (req, res) => {
@@ -39,7 +43,7 @@ app.get('/api/posts', (req, res) => {
   });
 });
 
-app.post('/posts', jsonParser, (req, res) => {
+app.post('/posts', (req, res) => {
   if (req.body.title && req.body.url) {
     conn.query('INSERT INTO posts(title,url) VALUES(?,?);', [req.body.title, req.body.url], (err, posts) => {
       if (err) {
@@ -53,9 +57,7 @@ app.post('/posts', jsonParser, (req, res) => {
             err: err.message,
           });
         };
-        res.status(200).json({
-          posts
-        });
+        res.status(200).redirect('/');
       });
     });
   } else {
@@ -64,7 +66,7 @@ app.post('/posts', jsonParser, (req, res) => {
   };
 });
 
-app.put('/posts/:id/upvote', jsonParser, (req, res) => {
+app.put('/posts/:id/upvote', (req, res) => {
   let id = req.params.id;
   if (id) {
     conn.query(`UPDATE posts SET score = score+1 WHERE id = ${id}`, (err) => {
@@ -92,7 +94,7 @@ app.put('/posts/:id/upvote', jsonParser, (req, res) => {
 });
 
 
-app.put('/posts/:id/downvote', jsonParser, (req, res) => {
+app.put('/posts/:id/downvote', (req, res) => {
   let id = req.params.id;
   conn.query(`UPDATE posts SET score = score-1 WHERE id = ${id}`, (err) => {
     if (err) {
@@ -113,7 +115,7 @@ app.put('/posts/:id/downvote', jsonParser, (req, res) => {
   });
 });
 
-app.put('/posts/:id', jsonParser, (req, res) => {
+app.put('/posts/:id', (req, res) => {
   let id = req.params.id;
   let newTitle = req.body.title;
   let newUrl = req.body.url;
