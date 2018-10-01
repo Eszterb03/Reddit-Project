@@ -84,6 +84,10 @@ window.onload = () => {
         btnModifyDiv.className = 'btnModifyDiv';
         btnModify.className = "button btnModify";
         btnModify.innerText = 'Modify';
+        btnModify.addEventListener('click', () => {
+          modify(post.id)
+        });
+
         const buttonDiv = document.createElement('div');
         buttonDiv.className = 'buttonforchange';
 
